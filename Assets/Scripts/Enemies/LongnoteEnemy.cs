@@ -17,7 +17,7 @@ public class LongnoteEnemy : MonoBehaviour
     public float scoreInterval = 0.5f; // 점수 추가 간격
     private event Action<int> LongnoteHit; // 롱노트 적 공격 시 호출되는 델리게이트
     private ScoreManager scoreManager; // 스코어 매니저 함수 접근 코드
-
+    
     void Start()
     {
         LongnoteHit += scoreManager.AddPerfect; // 스코어 매니저에 델리게이트 추가

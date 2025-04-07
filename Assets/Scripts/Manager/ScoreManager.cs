@@ -5,7 +5,7 @@ public class ScoreManager : MonoBehaviour
 {
 
     [Tooltip("점수 매니저")]
-    public static ScoreManager Instance { get; private set; }
+    public static ScoreManager Instance { get;  set; }
     [Tooltip("점수")]
     private int currentScore = 0;
     [Tooltip("퍼펙트 점수")]
@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject); // 기존 매니저 객체가 있으면 삭제
         }
     }
-
+// 아시 발발
     public void AddScore(int score)
     {
         currentScore += score;
