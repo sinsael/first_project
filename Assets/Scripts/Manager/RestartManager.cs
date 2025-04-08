@@ -7,6 +7,11 @@ public class RestartManager : MonoBehaviour
 {
   // 싱글톤 인스턴스
   public static RestartManager Instance {get; private set;} // 싱글톤 인스턴스
+  private readonly List<GameManager.GameState> restartgameStates = new List<GameManager.GameState>()
+  {
+    GameManager.GameState.Pause,
+    GameManager.GameState.GameOver
+};
 
 
     void Start()
@@ -26,15 +31,7 @@ public class RestartManager : MonoBehaviour
     public void Update()
     {
         // 게임이 진행 중일때 입력 처리
-        if (GameManager.Instance.currentGameState == GameManager.GameState.Pause) // 게임 상태가 Playing일 때
-        {
-            if (Input.GetKeyUp(KeyCode.R)) // R키를 눌렀을 때
-            {
-                Debug.Log("게임 재시작!"); // 디버그 메시지 출력
-                RestartGame(); // 게임 재시작
-            }
-        }
-        else if (GameManager.Instance.currentGameState == GameManager.GameState.GameOver) // 게임 상태가 GameOver일 때
+        if (restartgameStates.Contains(GameManager.Instance.currentGameState)) // 게임 상태가 Playing일 때
         {
             if (Input.GetKeyUp(KeyCode.R)) // R키를 눌렀을 때
             {

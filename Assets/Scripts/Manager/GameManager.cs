@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public enum GameState
     {
         Start,
+        dialogue,
         Playing,
         Pause,
         GameOver,
@@ -48,6 +49,8 @@ public class GameManager : MonoBehaviour
             {
                 case GameState.Start:
                     break;
+                case GameState.dialogue:
+                    break;
                 case GameState.Playing:
                     break;
                 case GameState.Pause:
@@ -67,6 +70,11 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.Playing; // 게임 상태 변경
     }
 
+    public void startDialogue()
+    {
+        currentGameState = GameState.dialogue; // 게임 상태 변경
+    }
+
     public void ResumeGame()
     {
         currentGameState = GameState.Playing; // 게임 상태 변경
@@ -82,26 +90,8 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.GameOver; // 게임 상태 변경
     }
 
-    // 게임 클리어 메서드
     public void GameClear()
     {
         currentGameState = GameState.Clear; // 게임 상태 변경
-    }
-
-    // 다음 씬으로 넘어가는 메서드
-    public void NextScene()
-    {
-        // 다음 씬으로 넘어가는 로직 구현
-        // 예를 들어, 다음 씬의 빌드 인덱스가 현재 씬의 빌드 인덱스 + 1이라고 가정
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadScene(nextSceneIndex); // 다음 씬 로드
-        }
-        else
-        {
-            Debug.Log("마지막 씬입니다."); // 마지막 씬일 경우 메시지 출력
-        }
-
     }
 }
