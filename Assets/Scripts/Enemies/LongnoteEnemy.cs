@@ -25,6 +25,11 @@ public class LongnoteEnemy : MonoBehaviour
 
     void Update()
     {
+        FollowJudgement();
+    }
+
+    private void FollowJudgement()
+    {
         if (isFollowing && followTarget != null)
         {
             // 적이 판정선의 X 위치를 따라감

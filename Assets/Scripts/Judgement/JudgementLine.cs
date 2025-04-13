@@ -38,20 +38,12 @@ public class JudgementLine : MonoBehaviour
         bool keyUp = Input.GetKeyUp(KeyCode.J) || Input.GetKeyUp(KeyCode.K) || Input.GetMouseButtonUp(0); // 키 입력 여부
         bool keyHold = Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.K) || Input.GetMouseButton(0); // 키 입력 여부
 
-        // 캐릭터와 판정선의 위치 
-        if (player != null)
-        {
-            transform.position = player.position + offset;
-        }
-        //공격
-        if (keyDown && !isAttack)
-        {
-            attack();
-        }
-        if (keyUp)
-        {
-            isAttack = false; // 공격 상태 종료
-        }
+        AttackEnemy(keyDown, keyUp);
+        AttackLongEnemy(keyUp, keyHold);
+    }
+
+    private void AttackLongEnemy(bool keyUp, bool keyHold)
+    {
         // 롱노트 공격 (누르면 따라가기 시작)
         if (keyHold && currentLongnote != null)
         {
@@ -68,6 +60,24 @@ public class JudgementLine : MonoBehaviour
                 currentLongnote.GetComponent<LongnoteEnemy>().StopFollowing(); // 롱노트 적 공격 종료
                 currentLongnote = null; // 롱노트 적 초기화
             }
+        }
+    }
+
+    private void AttackEnemy(bool keyDown, bool keyUp)
+    {
+        // 캐릭터와 판정선의 위치 
+        if (player != null)
+        {
+            transform.position = player.position + offset;
+        }
+        //공격
+        if (keyDown && !isAttack)
+        {
+            attack();
+        }
+        if (keyUp)
+        {
+            isAttack = false; // 공격 상태 종료
         }
     }
 

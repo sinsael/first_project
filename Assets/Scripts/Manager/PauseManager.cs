@@ -21,6 +21,24 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
+        PauseUpdate();
+        PlayingUpdate();
+    }
+
+    private void PlayingUpdate()
+    {
+        if (GameManager.Instance.currentGameState == GameManager.GameState.Pause) // 게임 상태가 Pause일 때
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Debug.Log("게임 재개!"); // 디버그 메시지 출력
+                StartCoroutine(ResumeGameAfterDelay(3f)); // 3초 대기 후 게임 재개
+            }
+        }
+    }
+
+    private void PauseUpdate()
+    {
         // 게임 일시정지 및 재개 처리
         if (GameManager.Instance.currentGameState == GameManager.GameState.Playing) // 게임 상태가 Playing일 때
         {
@@ -29,14 +47,6 @@ public class PauseManager : MonoBehaviour
                 Debug.Log("게임 일시 정지!"); // 디버그 메시지 출력
                 GameManager.Instance.previousGameState = GameManager.Instance.currentGameState; // 이전 게임 상태 저장
                 PauseGame(); // 게임 일시 정지
-            }
-        }
-        if (GameManager.Instance.currentGameState == GameManager.GameState.Pause) // 게임 상태가 Pause일 때
-        {
-            if (Input.GetKeyDown(KeyCode.P)) 
-            {
-                Debug.Log("게임 재개!"); // 디버그 메시지 출력
-                StartCoroutine(ResumeGameAfterDelay(3f)); // 3초 대기 후 게임 재개
             }
         }
     }
