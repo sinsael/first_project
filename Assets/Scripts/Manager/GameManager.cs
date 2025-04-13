@@ -44,6 +44,14 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if(currentGameState == GameState.Start)
+        {
+            if(Input.anyKey)
+            {
+                Time.timeScale = 1f;
+                currentGameState = GameState.Playing;
+            }
+        }
             // 게임이 진행 중일 때 입력 처리
             switch (currentGameState)
             {
