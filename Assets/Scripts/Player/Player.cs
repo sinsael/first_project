@@ -8,10 +8,7 @@ public class Player : MonoBehaviour
 
 {
     [Header("플레이어 스탯")]
-    [Tooltip("플레이어 속도")]
-    public float maxspeed;
-    [Tooltip("플레이어 점프력")]
-    public float jumpForce = 5f; // 점프력
+    [SerializeField] float jumpForce = 5f; // 점프력
     bool isJumping = false;
     [Header("점프 관련")]
     public KeyCode[] jumpKey = { KeyCode.Space, KeyCode.F, KeyCode.D }; // 점프 키 배열
@@ -28,7 +25,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         // 플레이어 자동 이동
-        transform.position = new Vector3(transform.position.x + maxspeed * Time.deltaTime * Time.timeScale, transform.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x * Time.deltaTime * Time.timeScale * 0, transform.position.y, transform.position.z);
 
         Jump();
 

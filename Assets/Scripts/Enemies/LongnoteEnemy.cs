@@ -6,7 +6,7 @@ public class LongnoteEnemy : MonoBehaviour
 {
     [Header("롱노트 적 설정")]
     [Tooltip("롱노트 따라가는 속도")]
-    public float followSpeed = 5f; // 따라가는 속도
+    [SerializeField] private float followSpeed = 5f; // 따라가는 속도
     [Tooltip("롱노트 적홀드 여부")]
     private bool isFollowing = false; 
     [Tooltip("롱노트 적홀드 타겟")]
@@ -14,7 +14,7 @@ public class LongnoteEnemy : MonoBehaviour
     [Tooltip("롱노트 적홀드 점수 추가 여부")]
     private const int perfectScore = 200; // 롱노트 적 공격 시 추가되는 점수
     [Tooltip("롱노트 적홀드 점수 추가 간격")]
-    public float scoreInterval = 0.5f; // 점수 추가 간격
+    [SerializeField]private float scoreInterval = 0.5f; // 점수 추가 간격
     private event Action<int> LongnoteHit; // 롱노트 적 공격 시 호출되는 델리게이트
     private ScoreManager scoreManager; // 스코어 매니저 함수 접근 코드
     

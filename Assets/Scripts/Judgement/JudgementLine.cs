@@ -8,9 +8,9 @@ using UnityEngine.UIElements;
 public class JudgementLine : MonoBehaviour
 {
     [Header("판정선 설정")]
-    public float judgeWindow = 0.5f;  // 판정 타이밍 범위 (조정된 값)
-    public Transform player; // 플레이어 캐릭터 위치
-    public Vector3 offset; // 캐릭터와 판정선의 거리
+    [SerializeField] float judgeWindow = 0.5f;  // 판정 타이밍 범위 (조정된 값)
+    [SerializeField] Transform player; // 플레이어 캐릭터 위치
+    [SerializeField] Vector3 offset; // 캐릭터와 판정선의 거리
     enum JudgeResult { Perfect, Nice, None } // 판정 종류
     private JudgeResult currentJudge = JudgeResult.None;  // 기본값을 None으로 설정
     [Header("공격 판정")]

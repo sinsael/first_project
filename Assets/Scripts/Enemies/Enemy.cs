@@ -5,16 +5,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("적 스탯")]
-    public int health;  // 체력
+    [SerializeField]private int health;  // 체력
     [Header("리스폰 설정")]
     private Vector3 initialPosition;  // 리스폰 위치
     private int respawnHealth;  // 리스폰 체력
     [Header("넉백 설정")]
     [Tooltip("넉백 거리")]
-    public float knockbackDistance = 1f;  // 넉백 거리
+    [SerializeField]float knockbackDistance = 1f;  // 넉백 거리
     private bool isKnockedBack = false;  // 넉백 여부
     [Tooltip("넉백 지속 시간")]
-    public float knockbackDuration = 0.25f;  // 넉백 지속 시간
+    [SerializeField] float knockbackDuration = 0.25f;  // 넉백 지속 시간
     [Tooltip("적 사망 시 호출되는 이벤트")]
     void Start()
     {

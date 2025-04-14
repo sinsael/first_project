@@ -11,10 +11,10 @@ public class DialogueManager : MonoBehaviour
     private string[] stage3Dialogue; // 스테이지 3 대화
     private string[] endDialogue; // 엔딩 대화
 
-    private int currentLine = 0; // 현재 라인
-    private int currentStage = 1; // 현재 스테이지 (1, 2, 3 등)
+    int currentLine = 0; // 현재 라인
+    int currentStage = 1; // 현재 스테이지 (1, 2, 3 등)
 
-    public float typingSpeed = 0.05f; // 텍스트 타이핑 속도
+    [SerializeField] float typingSpeed = 0.05f; // 텍스트 타이핑 속도
 
     public void Start()
     {
