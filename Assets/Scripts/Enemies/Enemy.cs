@@ -6,9 +6,6 @@ public class Enemy : MonoBehaviour
 {
     [Header("적 스탯")]
     [SerializeField]private int health;  // 체력
-    [Header("리스폰 설정")]
-    private Vector3 initialPosition;  // 리스폰 위치
-    private int respawnHealth;  // 리스폰 체력
     [Header("넉백 설정")]
     [Tooltip("넉백 거리")]
     [SerializeField]float knockbackDistance = 1f;  // 넉백 거리
