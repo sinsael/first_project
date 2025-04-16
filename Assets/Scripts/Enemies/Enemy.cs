@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
     IEnumerator Knockback(Vector3 targetPosition)
     {
         isKnockedBack = true;  // 넉백 시작
+        //넉백 애니메이션 넣기
         float elapsedTime = 0f;
         Vector3 startPosition = transform.position;
 
