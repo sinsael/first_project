@@ -31,6 +31,10 @@ public class Player : MonoBehaviour
 
     }
 
+    // 공격 애니메이션 메서드 생성하기
+
+
+
     // 점프 함수
     void Jump()
     {
