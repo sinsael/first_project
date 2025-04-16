@@ -10,7 +10,7 @@ public class LongnoteEnemy : MonoBehaviour
     [Tooltip("롱노트 적홀드 여부")]
     private bool isFollowing = false; 
     [Tooltip("롱노트 적홀드 타겟")]
-    private Transform followTarget;
+    [SerializeField] private Transform followTarget;
     [Tooltip("롱노트 적홀드 점수 추가 여부")]
     private const int perfectScore = 200; // 롱노트 적 공격 시 추가되는 점수
     [Tooltip("롱노트 적홀드 점수 추가 간격")]
