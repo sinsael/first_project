@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
 
     }
 
+    // 공격 애니메이션 메서드 생성하기
+
+
+
     // 점프 함수
     void Jump()
     {
@@ -38,6 +42,7 @@ public class Player : MonoBehaviour
 
                 rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
                 isJumping = true;
+                // 점프 애니메이션 넣기
             }
         }
     }
@@ -62,7 +67,7 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        gameObject.SetActive(false); // 플레이어 비활성화
+        gameObject.SetActive(false); // 플레이어 비활성화, 이곳 죽는 애니메이션 추가
         GameManager.Instance.GameOver(); // 게임 오버 처리
         Debug.Log("플레이어가 사망했습니다.");
     }
