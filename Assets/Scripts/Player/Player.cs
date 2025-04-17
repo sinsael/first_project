@@ -7,15 +7,12 @@ using TMPro;
 public class Player : MonoBehaviour
 
 {
-    [Header("플레이어 스탯")]
     [SerializeField] float jumpForce = 5f; // 점프력
+    private string[] enemyTag = { "Enemy", "LongnoteEnemy", "trap" }; // 적 태그 배열
     bool isJumping = false;
-    [Header("점프 관련")]
-    public KeyCode[] jumpKey = { KeyCode.Space, KeyCode.F, KeyCode.D }; // 점프 키 배열
     Rigidbody2D rigid;
     Animator anim;
-    private string[] enemyTag = { "Enemy", "LongnoteEnemy", "trap" }; // 적 태그 배열
-
+    public KeyCode[] jumpKey = { KeyCode.Space, KeyCode.F, KeyCode.D }; // 점프 키 배열
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();

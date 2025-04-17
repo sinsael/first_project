@@ -3,17 +3,11 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-
-    [Tooltip("점수 매니저")]
     public static ScoreManager Instance { get;  set; }
-    [Tooltip("점수")]
-    private int currentScore = 0;
-    [Tooltip("퍼펙트 점수")]
-    private int currentperfect = 0;
-    [Tooltip("나이스 점수")]
-    private int currentNice = 0;
-    [Tooltip("미스 점수")]
-    private int currentMiss = 0;
+    [SerializeField]private int currentScore = 0;
+    [SerializeField]private int currentperfect = 0;
+    [SerializeField]private int currentNice = 0;
+    [SerializeField]private int currentMiss = 0;
 
     void Start()
     {

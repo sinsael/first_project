@@ -7,24 +7,19 @@ using UnityEngine.UIElements;
 
 public class JudgementLine : MonoBehaviour
 {
-    [Header("판정선 설정")]
     [SerializeField] float judgeWindow = 0.5f;  // 판정 타이밍 범위 (조정된 값)
     [SerializeField] Transform player; // 플레이어 캐릭터 위치
     [SerializeField] Vector3 offset; // 캐릭터와 판정선의 거리
-    enum JudgeResult { Perfect, Nice, None } // 판정 종류
-    private JudgeResult currentJudge = JudgeResult.None;  // 기본값을 None으로 설정
-    [Header("공격 판정")]
-    bool isAttack = false; // 공격 여부
-    private GameObject currentLongnote = null; // 현재 활성화된 롱노트 적
-    [Header("각종 스크립트")]
-    [Tooltip("스코어 매니저")]
-    ScoreManager scoreManager; // 스코어매니저 함수 접근 코드
-    [Tooltip("적 공격 시 호출되는 델리게이트")]
-    private static Action<int> NoteHitPerfect; // 적 공격 시 호출되는 델리게이트
-    private static Action<int> NoteHitNice;
-    [Tooltip("롱노트, 적 공격 시 추가되는 점수")]
     private const int perfectScore = 200; // 롱노트, 적 공격 시 추가되는 점수
     private const int niceScore = 100; // 롱노트, 적 공격 시 추가되는 점수수
+    enum JudgeResult { Perfect, Nice, None } // 판정 종류
+    private JudgeResult currentJudge = JudgeResult.None;  // 기본값을 None으로 설정
+    private GameObject currentLongnote = null; // 현재 활성화된 롱노트 적
+    ScoreManager scoreManager; // 스코어매니저 함수 접근 코드
+    private static Action<int> NoteHitPerfect; // 적 공격 시 호출되는 델리게이트
+    private static Action<int> NoteHitNice;
+    bool isAttack = false; // 공격 여부
+    
     void Start()
     {
         scoreManager = ScoreManager.Instance; // 스코어 매니저 접근
@@ -40,6 +35,14 @@ public class JudgementLine : MonoBehaviour
 
         AttackEnemy(keyDown, keyUp);
         AttackLongEnemy(keyUp, keyHold);
+    }
+
+        void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("LongnoteEnemy"))
+        {
+            currentLongnote = collision.gameObject; // 롱노트 적 등록
+        }
     }
 
     private void AttackLongEnemy(bool keyUp, bool keyHold)
@@ -97,13 +100,11 @@ public class JudgementLine : MonoBehaviour
             {
                 if (distance <= judgeWindow * 0.2f) // 20% 범위 내: perfect
                 {
-                    currentJudge = JudgeResult.Perfect;
-                    NoteHitPerfect?.Invoke(perfectScore); // 델리게이트 호출
+                    perfectJudge();
                 }
                 else if (distance <= judgeWindow * 0.5f) // 50% 범위 내 : Nice
                 {
-                    currentJudge = JudgeResult.Nice;
-                    NoteHitNice?.Invoke(niceScore); // 델리게이트 호출
+                    NiceJudge();
                 }
                 // none이 아닐 경우 공격 시작
                 if (currentJudge != JudgeResult.None)
@@ -115,6 +116,20 @@ public class JudgementLine : MonoBehaviour
         }
     }
 
+    private void perfectJudge()
+    {
+        currentJudge = JudgeResult.Perfect;
+        NoteHitPerfect?.Invoke(perfectScore); // 델리게이트 호출
+    }
+
+    private void NiceJudge()
+    {
+        currentJudge = JudgeResult.Nice;
+        NoteHitNice?.Invoke(niceScore); // 델리게이트 호출
+    }
+
+    
+
     void ApplyDamage(Collider2D collision)
     {
         // 적에게 데미지를 적용하는 로직 추가
@@ -125,14 +140,6 @@ public class JudgementLine : MonoBehaviour
             {
                 enemy.TakeDamage(1);  // 데미지 1 적용
             }
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("LongnoteEnemy"))
-        {
-            currentLongnote = collision.gameObject; // 롱노트 적 등록
         }
     }
 
