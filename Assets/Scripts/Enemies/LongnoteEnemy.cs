@@ -5,15 +5,7 @@ using UnityEngine;
 public class LongnoteEnemy : MonoBehaviour
 {
     [SerializeField] private float followSpeed = 5f; // 따라가는 속도
-<<<<<<< HEAD
     [SerializeField] private float scoreInterval = 0.5f; // 점수 추가 간격
-=======
-    [Tooltip("롱노트 적홀드 여부")]
-    private bool isFollowing = false; 
-    [Tooltip("롱노트 적홀드 타겟")]
-    [SerializeField] private Transform followTarget;
-    [Tooltip("롱노트 적홀드 점수 추가 여부")]
->>>>>>> 8d537552cc4702e898e5af7ec8a37b827cd5dfad
     private const int perfectScore = 200; // 롱노트 적 공격 시 추가되는 점수
     private Transform followTarget;
     private ScoreManager scoreManager; // 스코어 매니저 함수 접근 코드

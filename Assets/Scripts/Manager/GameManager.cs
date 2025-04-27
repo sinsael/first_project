@@ -16,8 +16,7 @@ public class GameManager : MonoBehaviour
         GameOver,
         Clear
     }
-    public GameState currentGameState = GameState.Start; // 현재 게임 상태
-    public GameState previousGameState = GameState.Start; // 이전 게임 상태
+    public GameState currentGameState; // 현재 게임 상태
 
 
 
@@ -44,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(currentGameState == GameState.Start)
+          if(currentGameState == GameState.Start)
         {
             if(Input.anyKey)
             {
@@ -53,29 +52,35 @@ public class GameManager : MonoBehaviour
             }
         }
             // 게임이 진행 중일 때 입력 처리
-            switch (currentGameState)
-            {
-                case GameState.Start:
-                    break;
-                case GameState.dialogue:
-                    break;
-                case GameState.Playing:
-                    break;
-                case GameState.Pause:
-                    break;
-                case GameState.GameOver:
-                    break;
-                case GameState.Clear:
-                    break;
-            }
+        switch (currentGameState)
+        {
+            case GameState.Start:
+                break;
+            case GameState.dialogue:
+                break;
+            case GameState.Playing:
+                break;
+            case GameState.Pause:
+                break;
+            case GameState.GameOver:
+                break;
+            case GameState.Clear:
+                break;
+        }
     }
 
 
 
     // 게임 시작 메서드
+    public void OpenGame()
+    {
+        currentGameState = GameState.Start; // 게임 상태 변경
+        Time.timeScale = 0f; // 게임 속도 정상화
+    }
     public void StartGame()
     {
         currentGameState = GameState.Playing; // 게임 상태 변경
+
     }
 
     public void startDialogue()

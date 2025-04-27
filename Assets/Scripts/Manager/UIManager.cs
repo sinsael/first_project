@@ -45,6 +45,16 @@ public class UIManager : MonoBehaviour
         };
     }
 
+    void Start()
+    {
+        // 모든 UI 비활성화
+        uidict[UIType.ClearUI].SetActive(false); // 클리어 UI 비활성화
+        uidict[UIType.GameOverUI].SetActive(false); // 게임 오버 UI 비활성화
+        uidict[UIType.PauseUI].SetActive(false); // 일시 정지 UI 비활성화
+        fadeCanvasGroup = FadeUI.GetComponent<CanvasGroup>(); // 페이드 UI의 CanvasGroup 컴포넌트 가져오기
+        uidict[UIType.FadeUI].SetActive(false); // 페이드 UI 활성화
+    }
+
     // UI 활성화 메서드
     public void ShowUI(UIType uiType)
     {
