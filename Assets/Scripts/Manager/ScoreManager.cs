@@ -4,10 +4,10 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get;  set; }
-    [SerializeField]private int currentScore = 0;
-    [SerializeField]private int currentperfect = 0;
-    [SerializeField]private int currentNice = 0;
-    [SerializeField]private int currentMiss = 0;
+    public int currentScore = 0; 
+    public int currentperfect = 0;
+    public int currentNice = 0;
+    public int currentMiss = 0;
 
     void Start()
     {
@@ -56,7 +56,6 @@ public class ScoreManager : MonoBehaviour
 
     public int GetNice()
     {
-
         return currentNice;
     }
 

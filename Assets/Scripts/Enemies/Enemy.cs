@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float knockbackDistance = 1f;  // 넉백 거리
 
     [SerializeField] float knockbackDuration = 0.25f;  // 넉백 지속 시간
+    private Rigidbody2D rb;
     private bool isKnockedBack = false;  // 넉백 여부
 
     public void TakeDamage(int damage)
@@ -53,6 +54,16 @@ public class Enemy : MonoBehaviour
         transform.position = targetPosition;  // 최종 위치 보정
         isKnockedBack = false;  // 넉백 끝
     }
+
+    IEnumerator ApplyKnockback(Vector2 direction)
+    {
+        isKnockedBack = true;
+        rb.AddForce(direction.normalized * knockbackDistance, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(knockbackDuration);
+        rb.velocity = Vector2.zero;
+        isKnockedBack = false;
+    }
+
 
     void Die()
     {

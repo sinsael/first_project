@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 9208314971735257481}
   - component: {fileID: 3327601702225422107}
   - component: {fileID: 886520539678546178}
-  - component: {fileID: 247830316729966166}
+  - component: {fileID: 4573746377530167386}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Gamemanager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78b9546f42383a4aa1b9972735946e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentScore: 0
+  currentperfect: 0
+  currentNice: 0
+  currentMiss: 0
 --- !u!114 &3327601702225422107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +64,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameState: 0
-  previousGameState: 0
 --- !u!114 &886520539678546178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6dbde79c82fe9428a5001e2c4236f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &247830316729966166
+--- !u!114 &4573746377530167386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -82,6 +85,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7187373444523051268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a178e64ca1f01e345a3fa024482166b4, type: 3}
+  m_Script: {fileID: 11500000, guid: cf70114cb4e31ec459310094d49a68a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClearUI: {fileID: 0}
+  GameOverUI: {fileID: 1193042088481793945, guid: 0567b85213e7cff4784060f6957acc31, type: 3}
+  PauseUI: {fileID: 3992191828801568733, guid: 0f0d2028b7152574b9c77ca3ac9039bf, type: 3}

@@ -64,6 +64,9 @@ public class Player : MonoBehaviour
     {
         gameObject.SetActive(false); // 플레이어 비활성화
         GameManager.Instance.GameOver(); // 게임 오버 처리
+        Time.timeScale = 0; // 게임 일시 정지
+        // 사망 UI 표시
+        UIManager.Instance.ShowUI(UIManager.UIType.GameOverUI);
         Debug.Log("플레이어가 사망했습니다.");
     }
 }

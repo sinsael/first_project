@@ -19,7 +19,7 @@ public class JudgementLine : MonoBehaviour
     private static Action<int> NoteHitPerfect; // 적 공격 시 호출되는 델리게이트
     private static Action<int> NoteHitNice;
     bool isAttack = false; // 공격 여부
-    
+
     void Start()
     {
         scoreManager = ScoreManager.Instance; // 스코어 매니저 접근
@@ -37,7 +37,7 @@ public class JudgementLine : MonoBehaviour
         AttackLongEnemy(keyUp, keyHold);
     }
 
-        void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("LongnoteEnemy"))
         {
@@ -74,9 +74,9 @@ public class JudgementLine : MonoBehaviour
             transform.position = player.position + offset;
         }
         //공격
-        if (keyDown && !isAttack)
+        if (keyDown && !isAttack) // 공격 키 입력 시
         {
-            attack();
+            attack(); // 공격 함수 호출
         }
         if (keyUp)
         {
@@ -96,13 +96,13 @@ public class JudgementLine : MonoBehaviour
         {
             float distance = math.abs(transform.position.x - enemyObj.transform.position.x); // 공격 판정선과 적의 x 위치 비교
 
-            if (distance <= judgeWindow) // 판정선 범위 내의 적들만 체크
+            if (distance <= judgeWindow && GameManager.Instance.currentGameState == GameManager.GameState.Playing) // 판정선 범위 내의 적들만 체크, 플레이 중일때만 판정
             {
                 if (distance <= judgeWindow * 0.2f) // 20% 범위 내: perfect
                 {
                     perfectJudge();
                 }
-                else if (distance <= judgeWindow * 0.5f) // 50% 범위 내 : Nice
+                else if (distance <= judgeWindow * 0.8f) // 50% 범위 내 : Nice
                 {
                     NiceJudge();
                 }
@@ -128,7 +128,7 @@ public class JudgementLine : MonoBehaviour
         NoteHitNice?.Invoke(niceScore); // 델리게이트 호출
     }
 
-    
+
 
     void ApplyDamage(Collider2D collision)
     {
