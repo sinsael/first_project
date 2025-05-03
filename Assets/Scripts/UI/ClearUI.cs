@@ -9,9 +9,9 @@ public class ClearUI : DefualtUI
      public virtual void nextStageButton()
     {
 
-        Debug.Log("다음 스테이로 이동");
+        Debug.Log("다음 스테이지지로 이동");
 
-        GameManager.Instance.currentGameState = GameManager.GameState.Start;
+        GameManager.Instance.OpenGame();
 
         Time.timeScale = 1f;
 

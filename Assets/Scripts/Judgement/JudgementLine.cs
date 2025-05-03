@@ -29,12 +29,19 @@ public class JudgementLine : MonoBehaviour
 
     void Update()
     {
-        bool keyDown = Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.K) || Input.GetMouseButtonDown(0); // 키 입력 여부
-        bool keyUp = Input.GetKeyUp(KeyCode.J) || Input.GetKeyUp(KeyCode.K) || Input.GetMouseButtonUp(0); // 키 입력 여부
-        bool keyHold = Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.K) || Input.GetMouseButton(0); // 키 입력 여부
+        bool keyDown, keyUp, keyHold;
+        KeyBool(out keyDown, out keyUp, out keyHold);
 
         AttackEnemy(keyDown, keyUp);
         AttackLongEnemy(keyUp, keyHold);
+    }
+
+    private static void KeyBool(out bool keyDown, out bool keyUp, out bool keyHold)
+    {
+        keyDown = Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.K) || Input.GetMouseButtonDown(0);
+        keyUp = Input.GetKeyUp(KeyCode.J) || Input.GetKeyUp(KeyCode.K) || Input.GetMouseButtonUp(0);
+        keyHold = Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.K) || Input.GetMouseButton(0);
+        // 키 입력 여부
     }
 
     void OnTriggerEnter2D(Collider2D collision)

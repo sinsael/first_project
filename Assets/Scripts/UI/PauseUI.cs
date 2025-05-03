@@ -10,6 +10,7 @@ public class PauseUI : DefualtUI
                              // 싱글톤 
     public static PauseUI Instance { get; private set; }
 
+
     void Awake()
     {
         if (Instance == null)
@@ -21,15 +22,24 @@ public class PauseUI : DefualtUI
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
+
     }
     void Start()
     {
-        canvasGroup = GetComponent<CanvasGroup>(); // CanvasGroup 컴포넌트 가져오기
-        // UI 비활성화
-        gameObject.SetActive(false); // 현재 UI 비활성화
+        canvasGroup = GetComponent<CanvasGroup>();
+
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.PauseUI = this.gameObject;
+            if (UIManager.Instance.uidict != null)
+            {
+                UIManager.Instance.uidict[UIManager.UIType.PauseUI] = this.gameObject;
+            }
+        }
+
 
     }
+
     public override void ContinueButton()
     {
         Debug.Log("게임 재개!"); // 디버그 메시지 출력

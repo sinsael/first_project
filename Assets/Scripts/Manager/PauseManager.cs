@@ -32,18 +32,9 @@ public class PauseManager : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Escape)) // esc키를 눌렀을 때
             {
                 Debug.Log("게임 일시 정지!"); // 디버그 메시지 출력
-                GameManager.Instance.currentGameState = GameManager.GameState.Pause; // 게임 상태 변경
-                PauseGame(); // 게임 일시 정지
+                Time.timeScale = 0f;
+                GameManager.Instance.PauseGame();
             }
         }
-    }
-
-    // 게임 일시 정지 메서드
-    void PauseGame()
-    {
-        Time.timeScale = 0f; // 게임 속도 정지
-        GameManager.Instance.currentGameState = GameManager.GameState.Pause; // 게임 상태 변경
-        // UI 활성화
-        UIManager.Instance.ShowUI(UIManager.UIType.PauseUI); // 일시정지 UI 활성화
     }
 }

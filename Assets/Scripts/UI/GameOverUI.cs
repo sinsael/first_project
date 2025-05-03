@@ -18,12 +18,19 @@ public class GameOverUI : DefualtUI
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
     }
     void Start()
     {
-        // UI 비활성화
-        gameObject.SetActive(false); // 현재 UI 비활성화
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.PauseUI = this.gameObject;
+            if (UIManager.Instance.uidict != null)
+            {
+                UIManager.Instance.uidict[UIManager.UIType.GameOverUI] = this.gameObject;
+            }
+        }
+
+
 
     }
 }

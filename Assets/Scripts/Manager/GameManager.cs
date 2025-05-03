@@ -43,15 +43,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-          if(currentGameState == GameState.Start)
-        {
-            if(Input.anyKey)
-            {
-                Time.timeScale = 1f;
-                currentGameState = GameState.Playing;
-            }
-        }
-            // 게임이 진행 중일 때 입력 처리
+        GameStartMethod();
+        // 게임이 진행 중일 때 입력 처리
+        SwitchGameState();
+    }
+
+    private void SwitchGameState()
+    {
         switch (currentGameState)
         {
             case GameState.Start:
@@ -66,6 +64,22 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Clear:
                 break;
+        }
+    }
+
+    private void GameStartMethod()
+    {
+        if (currentGameState == GameState.Start)
+        {
+            if (Input.anyKey)
+            {
+                Time.timeScale = 1f;
+                currentGameState = GameState.Playing;
+            }
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -96,15 +110,18 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         currentGameState = GameState.Pause; // 게임 상태 변경
+        UIManager.Instance.ShowUI(UIManager.UIType.PauseUI); // 일시정지 UI 활성화
     }
 
     public void GameOver()
     {
         currentGameState = GameState.GameOver; // 게임 상태 변경
+        UIManager.Instance.ShowUI(UIManager.UIType.GameOverUI);
     }
 
     public void GameClear()
     {
         currentGameState = GameState.Clear; // 게임 상태 변경
+        UIManager.Instance.ShowUI(UIManager.UIType.ClearUI);
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -25,30 +26,48 @@ public class UIManager : MonoBehaviour
     {
         if (Instance == null)
         {
-            Instance = this; // 인스턴스 설정
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject); // 중복된 객체 제거
-            return;
-        }
+            Instance = this;
 
-        uidict = new Dictionary<UIType, GameObject>() // UI 딕셔너리 초기화
+            // PauseUI가 null이면 현재 존재하는 싱글톤을 참조
+            if (PauseUI == null && global::PauseUI.Instance != null)
+            {
+                PauseUI = global::PauseUI.Instance.gameObject;
+            }
+
+            uidict = new Dictionary<UIType, GameObject>()
         {
             { UIType.ClearUI, ClearUI },
             { UIType.GameOverUI, GameOverUI },
             { UIType.PauseUI, PauseUI },
             { UIType.NoneUI, NoneUI }
         };
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
     }
 
     void Start()
     {
-        // 모든 UI 비활성화
-        uidict[UIType.ClearUI].SetActive(false); // 클리어 UI 비활성화
-        uidict[UIType.GameOverUI].SetActive(false); // 게임 오버 UI 비활성화
-        uidict[UIType.PauseUI].SetActive(false); // 일시 정지 UI 비활성화
+        HideAllUI();
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        HideAllUI(); // 씬 로드될 때 UI 전부 끄기
     }
 
     // UI 활성화 메서드
@@ -67,5 +86,15 @@ public class UIManager : MonoBehaviour
         {
             uidict[uiType].SetActive(false); // UI 비활성화
         }
+    }
+
+    public void HideAllUI()
+    {
+        foreach (var ui in uidict.Values)
+        {
+            if (ui != null)
+                ui.SetActive(false);
+        }
+
     }
 }

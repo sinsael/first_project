@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Object_Move : MonoBehaviour
 {
+    public int Movespeed = 5;
     // 이동하지 않는 상태 묶는 키워드
     void FixedUpdate()
     {
@@ -9,7 +10,7 @@ public class Object_Move : MonoBehaviour
         if (GameManager.Instance.currentGameState == GameManager.GameState.Playing)
         {
             // Time.deltaTime을 사용하여 이동 속도 조절
-            transform.position += Vector3.left * Time.deltaTime * 5f; // 오른쪽으로 이동
+            transform.position += Vector3.left * Time.deltaTime * Movespeed; // 오른쪽으로 이동
         }
         // 게임이 정지 상태일 때는 이동하지 않음
         else if (GameManager.Instance.currentGameState == GameManager.GameState.Start)

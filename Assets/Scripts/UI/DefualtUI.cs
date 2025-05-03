@@ -36,7 +36,7 @@ public class DefualtUI : MonoBehaviour
     public virtual void ContinueGame()
     {
         Time.timeScale = 1f; // 게임 속도 정상화
-        GameManager.Instance.currentGameState = GameManager.GameState.Playing; // 게임 상태 변경
+        GameManager.Instance.StartGame();
         /// UI 비활성화
         UIManager.Instance.HideUI(UIManager.UIType.NoneUI); // UI 비활성화
     }
@@ -44,8 +44,9 @@ public class DefualtUI : MonoBehaviour
 
     public virtual IEnumerator RestartAfterSceneLoad()
     {
-        GameManager.Instance.currentGameState = GameManager.GameState.Start; // 게임 상태 변경
+        GameManager.Instance.OpenGame();
         Time.timeScale = 0f; // 게임 속도 정지
+        gameObject.SetActive(false);
         Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);
         yield return null; // 한 프레임 기다리기 (씬 전환 완료까지 대기)
