@@ -9,9 +9,6 @@ public class ScoreManager : MonoBehaviour
     public int currentNice = 0;
     public int currentMiss = 0;
 
-    void Start()
-    {
-    }
     private void Awake()
     {
         if (Instance == null)

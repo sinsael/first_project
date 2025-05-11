@@ -29,6 +29,7 @@ public class DefualtUI : MonoBehaviour
         // 일시정지 화면 투명하게 만들기
         Debug.Log("대기 시간 : " + delay + "초"); // 대기 시간 출력
         Debug.Log("게임 재개!"); // 디버그 메시지 출력
+        SoundManager.instance.ResumeSound();
         ContinueGame(); // 게임 재개
     }
 

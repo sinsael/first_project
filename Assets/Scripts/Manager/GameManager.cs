@@ -117,11 +117,13 @@ public class GameManager : MonoBehaviour
     {
         currentGameState = GameState.GameOver; // 게임 상태 변경
         UIManager.Instance.ShowUI(UIManager.UIType.GameOverUI);
+        ScoreManager.Instance.AddMiss(); // 게임 오버 시 점수 처리
     }
 
     public void GameClear()
     {
         currentGameState = GameState.Clear; // 게임 상태 변경
         UIManager.Instance.ShowUI(UIManager.UIType.ClearUI);
+        
     }
 }

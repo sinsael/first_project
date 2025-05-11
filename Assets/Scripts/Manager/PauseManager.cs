@@ -33,6 +33,7 @@ public class PauseManager : MonoBehaviour
             {
                 Debug.Log("게임 일시 정지!"); // 디버그 메시지 출력
                 Time.timeScale = 0f;
+                SoundManager.instance.PauseSound(); // 사운드 일시 정지
                 GameManager.Instance.PauseGame();
             }
         }

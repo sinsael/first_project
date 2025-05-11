@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class ClearUI : DefualtUI
 {
     [SerializeField] string stagename;
-     public virtual void nextStageButton()
+     public void nextStageButton()
     {
 
         Debug.Log("다음 스테이지지로 이동");

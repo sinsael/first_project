@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
         AutoMove();
 
         Jump();
-
     }
 
     private void AutoMove()
