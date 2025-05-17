@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class DefualtUI : MonoBehaviour
 {
-    
-   
     public virtual void ContinueButton()
     {
         Debug.Log("게임 재개!"); // 디버그 메시지 출력
@@ -46,11 +44,12 @@ public class DefualtUI : MonoBehaviour
     public virtual IEnumerator RestartAfterSceneLoad()
     {
         GameManager.Instance.OpenGame();
-        Time.timeScale = 0f; // 게임 속도 정지
         gameObject.SetActive(false);
         Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);
+        SoundManager.instance.StopAllSounds();
         yield return null; // 한 프레임 기다리기 (씬 전환 완료까지 대기)
+        
     }
 
     public virtual void GoToMainMenu()

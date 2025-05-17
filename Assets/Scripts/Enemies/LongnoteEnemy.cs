@@ -14,7 +14,15 @@ public class LongnoteEnemy : MonoBehaviour
 
     void Start()
     {
-        LongnoteHit += scoreManager.AddPerfect; // 스코어 매니저에 델리게이트 추가
+        scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager != null)
+        {
+            LongnoteHit += scoreManager.AddPerfect;
+        }
+        else
+        {
+            Debug.LogWarning("ScoreManager를 찾을 수 없습니다!");
+        }
     }
 
     void Update()

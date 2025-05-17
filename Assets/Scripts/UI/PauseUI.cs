@@ -69,14 +69,14 @@ public class PauseUI : DefualtUI
 
     public override IEnumerator RestartAfterSceneLoad()
     {
-        GameManager.Instance.currentGameState = GameManager.GameState.Start; // 게임 상태 변경
-        Time.timeScale = 0f; // 게임 속도 정지
         Scene current = SceneManager.GetActiveScene();
         ScoreManager.Instance.ResetScore();
         ScoreManager.Instance.ResetMiss();
         UIManager.Instance.HideUI(UIManager.UIType.PauseUI); // 일시정지 UI 비활성화
         SceneManager.LoadScene(current.name);
+        GameManager.Instance.OpenGame();
         yield return null; // 한 프레임 기다리기 (씬 전환 완료까지 대기)
+
     }
 
     // 캔버스그룹 투명도 설정

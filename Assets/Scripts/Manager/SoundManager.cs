@@ -6,8 +6,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance; // 싱글톤 인스턴스
 
-    AudioSource soundSource; // 효과음 설정
-    AudioSource bgmSource; // 배경음악 설정
+    [SerializeField] AudioSource soundSource; // 효과음 설정
+    [SerializeField] AudioSource bgmSource; // 배경음악 설정
     [SerializeField] public AudioClip[] sfxList; // 사운드 리스트
     [SerializeField] public AudioClip[] bgmList; // 배경음악 리스트
 
@@ -28,7 +28,7 @@ public class SoundManager : MonoBehaviour
     {
         soundSource = gameObject.AddComponent<AudioSource>(); // AudioSource 컴포넌트 추가
         bgmSource = gameObject.AddComponent<AudioSource>(); // AudioSource 컴포넌트 추가
-        bgmSource.loop = true; // 배경음악 반복 재생 설정
+        bgmSource.loop = false; // 배경음악 반복 재생 설정
     }
 
     // soundSource의 볼륨을 설정하는 프로퍼티
@@ -67,11 +67,23 @@ public class SoundManager : MonoBehaviour
     {
         soundSource.Stop();
         bgmSource.Stop(); // 모든 사운드 정지
+        ResetSFXSound();
+        ResetBGMSound();
     }
 
     // 클리어 사운드 재생 메서드
     public void PlayClearSound()
     {
         soundSource.PlayOneShot(sfxList[0]); // 클리어 사운드 재생
+    }
+
+    public void ResetSFXSound()
+    {
+        soundSource.clip = null;
+    }
+
+    public void ResetBGMSound()
+    {
+        bgmSource.clip = null;
     }
 }

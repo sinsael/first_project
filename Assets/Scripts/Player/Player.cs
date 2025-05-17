@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     Rigidbody2D rigid;
     Animator anim;
     public KeyCode[] jumpKey = { KeyCode.Space, KeyCode.F, KeyCode.D }; // 점프 키 배열
-    Object_Move object_Move;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -22,15 +21,27 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        AutoMove();
-
         Jump();
     }
 
-    private void AutoMove()
+    // 플레이어 가만히 있는 함수
+    private void Idle()
     {
-        // 플레이어 자동 이동
-        transform.position = new Vector3(transform.position.x * Time.deltaTime * Time.timeScale * 0, transform.position.y, transform.position.z);
+        if (GameManager.Instance.currentGameState == GameManager.GameState.Start)
+        {
+            // 플레이어 가만히 있는 상태
+            anim.SetBool("ToIdle", true);
+            anim.SetBool("ToRun", false);
+            anim.SetBool("ToJump", false);
+        }
+        else
+        {
+            // 플레이어 가만히 있는 상태
+            anim.SetBool("ToIdle", false);
+            anim.SetBool("ToRun", true);
+            anim.SetBool("ToJump", false);
+        }
+
     }
 
     // 점프 함수
@@ -78,7 +89,7 @@ public class Player : MonoBehaviour
     void Clear()
     {
         GameManager.Instance.GameClear();
-        
+
         UIManager.Instance.ShowUI(UIManager.UIType.ClearUI);
         Debug.Log("클리어");
     }
@@ -87,7 +98,6 @@ public class Player : MonoBehaviour
     {
         gameObject.SetActive(false); // 플레이어 비활성화
         GameManager.Instance.GameOver(); // 게임 오버 처리
-        object_Move.Movespeed = 0;
         // 사망 UI 표시시
         Debug.Log("플레이어가 사망했습니다.");
     }

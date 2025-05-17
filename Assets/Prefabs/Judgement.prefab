@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   judgeWindow: 0.7
-  player: {fileID: 0}
+  player: {fileID: 1142756575178387924, guid: d4b28dd84a665154f8ba7572c7565a10, type: 3}
   offset: {x: 2, y: 0, z: 0}
 --- !u!61 &203697342575597007
 BoxCollider2D:

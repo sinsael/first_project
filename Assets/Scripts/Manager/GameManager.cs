@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public enum GameState
     {
         Start,
-        dialogue,
         Playing,
         Pause,
         GameOver,
@@ -37,8 +36,10 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); // 씬 전환 시에도 GameManager 유지
 
         // 게임 시작 시 초기 상태 설정
-        currentGameState = GameState.Start; // 게임 상태 초기화
-        Time.timeScale = 0f; // 게임 속도 정지
+        OpenGame(); // 게임 시작 메서드 호출
+
+        Time.timeScale = 0f; // 게임 속도 0으로 설정 (일시정지 상태)
+
     }
 
     void Update()
@@ -53,8 +54,6 @@ public class GameManager : MonoBehaviour
         switch (currentGameState)
         {
             case GameState.Start:
-                break;
-            case GameState.dialogue:
                 break;
             case GameState.Playing:
                 break;
@@ -73,8 +72,8 @@ public class GameManager : MonoBehaviour
         {
             if (Input.anyKey)
             {
-                Time.timeScale = 1f;
-                currentGameState = GameState.Playing;
+                Debug.Log("게임 시작!"); // 디버그 메시지 출력
+                StartGame(); // 게임 시작 메서드 호출
             }
         }
         else
@@ -89,22 +88,17 @@ public class GameManager : MonoBehaviour
     public void OpenGame()
     {
         currentGameState = GameState.Start; // 게임 상태 변경
-        Time.timeScale = 0f; // 게임 속도 정상화
     }
     public void StartGame()
     {
         currentGameState = GameState.Playing; // 게임 상태 변경
-
-    }
-
-    public void startDialogue()
-    {
-        currentGameState = GameState.dialogue; // 게임 상태 변경
+        Time.timeScale = 1f; // 게임 속도 정상화
     }
 
     public void ResumeGame()
     {
         currentGameState = GameState.Playing; // 게임 상태 변경
+
     }
 
     public void PauseGame()
@@ -118,12 +112,13 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.GameOver; // 게임 상태 변경
         UIManager.Instance.ShowUI(UIManager.UIType.GameOverUI);
         ScoreManager.Instance.AddMiss(); // 게임 오버 시 점수 처리
+        SoundManager.instance.StopAllSounds();
     }
 
     public void GameClear()
     {
         currentGameState = GameState.Clear; // 게임 상태 변경
         UIManager.Instance.ShowUI(UIManager.UIType.ClearUI);
-        
+
     }
 }
