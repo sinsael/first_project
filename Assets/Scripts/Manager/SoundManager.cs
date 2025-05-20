@@ -11,6 +11,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] public AudioClip[] sfxList; // 사운드 리스트
     [SerializeField] public AudioClip[] bgmList; // 배경음악 리스트
 
+    public enum SfxSoundSource
+    {
+        button,hit,gameover,clear
+    }
+
     void Awake()
     {
         if (instance == null) // 인스턴스가 없으면 생성
